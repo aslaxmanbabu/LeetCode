@@ -3,6 +3,9 @@ class Solution:
         n = len(matrix)
         for i in range(n):
             for j in range(n-1, i, -1):
+                if i == j:
+                    pass
+                
                 temp = matrix[i][j]
                 matrix[i][j] = matrix[j][i]
                 matrix[j][i] = temp
