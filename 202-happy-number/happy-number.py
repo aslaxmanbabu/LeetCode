@@ -1,18 +1,19 @@
 class Solution:
     def isHappy(self, n: int) -> bool:
-        if n == 1 or n == 7 or n == 1111111 or n == 101120:
-            return True
+        
 
-        while(n > 9):
+        s = set()
+        while n not in s:
             x = 0
+            s.add(n)
             for i in str(n):
                 i = int(i)
                 x = x + i*i
+            
             n = x
+            if n == 1:
+                return True
+        return False
 
-        if n == 1:
-            return True
-        else:
-            return False 
             
         
