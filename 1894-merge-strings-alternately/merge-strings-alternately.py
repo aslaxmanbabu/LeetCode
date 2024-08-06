@@ -8,13 +8,8 @@ class Solution:
             result += word1[i] + word2[i]
             i += 1
 
-        while i < n1:
-            result += word1[i]
-            i += 1
-
-        while i < n2:
-            result += word2[i]
-            i += 1
+        result += word1[i:]
+        result += word2[i:]
         
         return result
         
