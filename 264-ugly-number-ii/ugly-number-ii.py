@@ -1,12 +1,12 @@
 class Solution:
     def nthUglyNumber(self, n: int) -> int:
-        primes = [2, 3, 5]
-        ugly = [1]
-        for _ in range(n):
-            curr = heappop(ugly)
-            for p in primes:
-                new_ugly = curr * p
-                if new_ugly not in ugly:
-                    heappush(ugly, new_ugly)
+        l = [0] * n
+        l[0] = 1
+        a = b = c = 0
+        for i in range(1, n):
+            l[i] = min(l[a]*2, l[b]*3, l[c]*5)
+            if l[i] == l[a]*2 : a += 1
+            if l[i] == l[b]*3 : b += 1
+            if l[i] == l[c]*5 : c += 1
         
-        return curr
+        return l[n-1]
