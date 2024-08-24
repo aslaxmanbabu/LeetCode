@@ -1,10 +1,15 @@
 class Solution:
     def isPalindrome(self, x: int) -> bool:
-        n = len(str(x))
-        temp = str(x)
-        for i in range(n//2):
-            if temp[i] != temp[n-1-i]:
-                return False
+        t = str(x)
+        n = len(t)
+        return self.helper(t, 0, n-1)
+    
+    def helper(self, t, left, right):
+        if left >= right:
+            return True
         
-        return True
+        if t[left] != t[right]:
+            return False
+        
+        return self.helper(t, left+1, right-1)
         
