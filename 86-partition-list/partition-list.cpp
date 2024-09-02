@@ -10,73 +10,30 @@
  */
 class Solution {
 public:
-    void display(ListNode *node) {
-        while (node) {
-            cout<<node->val<<" ";
-            node = node->next;
-        }
-        cout<<endl;
-    }
     ListNode* partition(ListNode* head, int x) {
-        ListNode* curr = head;
-        ListNode* prev = new ListNode;
-        ListNode* temp = new ListNode;
-        ListNode* b = new ListNode;
-        if (!curr || !curr->next) {
-            return curr;
-        }
-        int bound = curr->val;
-        if (bound >= x) {
-            prev = NULL;
-        }
-        else {
-            while (curr->next != NULL && curr->val < x) {
-                prev = curr;
-                curr = curr->next;
-            }
-        }
-        cout<<"Test: "<<curr->val<<endl;
-        if (curr->next == NULL) {
-            return head;
-        }
-        b = curr;
-        while (curr->next != NULL) {
-            cout<<curr->val<<endl;
-            if(curr->next->val < x) {
-                if (prev == NULL) {
-                    prev = curr->next;
-                    curr->next = curr->next->next;
-                    prev->next = b;
-                    head = prev;
-                    cout<<"Test1: "<<prev->val<<endl;
-                    cout<<"Test2: "<<curr->val<<endl;
-                }
-                else {
-                    
-                    temp = curr->next;
-                    curr->next = curr->next->next;
-                    prev->next = temp;
-                    temp->next = b;
-                    cout<<"Prev: "<<prev->val<<endl;
-                    cout<<"Temp: "<<temp->val<<endl;
-                    cout<<"Curr: "<<curr->val<<endl;
-                    cout<<"B: "<<b->val<<endl;
-                    prev = prev->next;
-                    
-                    // cout<<"Next: "<<curr->next->val<<endl;
-                }
-                if (curr->next == NULL) {
-                    cout<<"Pr: "<<prev->val<<" "<<curr->val<<endl;
-                    break;
-                }
+        ListNode *dummy1 = new ListNode;
+        ListNode *temp1 = dummy1;
+        ListNode *dummy2 = new ListNode;
+        ListNode *temp2 = dummy2;
+
+        while(head) {
+            if(head->val < x) {
+                temp1->next = head;
+                temp1 = temp1->next;
             }
             else {
-                curr = curr->next;
+                temp2->next = head;
+                temp2 = temp2->next;
             }
-            display(head);
+            head = head->next;
         }
 
-        return head;
-        
+        if (dummy1->next == NULL) {
+            return dummy2->next;
+        }
+        temp1->next = dummy2->next;
+        temp2->next = NULL;
+
+        return dummy1->next;
     }
 };
