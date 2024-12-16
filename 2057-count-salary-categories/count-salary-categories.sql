@@ -1,0 +1,22 @@
+# Write your MySQL query statement below
+SELECT
+    'Low Salary' AS CATEGORY,
+    COUNT(IF (INCOME < 20000, 1, NULL)) AS ACCOUNTS_COUNT
+
+FROM ACCOUNTS
+
+UNION ALL
+
+SELECT
+    'Average Salary',
+    COUNT(IF(INCOME >= 20000 AND INCOME <= 50000, 1, NULL))
+FROM
+    ACCOUNTS
+UNION ALL
+SELECT
+    'High Salary',
+    COUNT(IF(INCOME > 50000, 1, NULL))
+FROM ACCOUNTS
+
+ORDER BY
+    ACCOUNTS_COUNT;
