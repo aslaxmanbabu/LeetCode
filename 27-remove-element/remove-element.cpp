@@ -1,17 +1,17 @@
 class Solution {
 public:
     int removeElement(vector<int>& nums, int val) {
-        
-        vector<int> temp;
-        int ans = nums.size();
-        for (int i=0; i<nums.size(); i++) {
-            if(val == nums[i]) {
-                nums.erase(nums.begin()+i);
-                i--;
-                ans--;
+        int count = 0;
+        for(int i=0; i<nums.size(); i++) {
+            if(nums[i] == val) {
+                nums[i] = 51;
+            }
+            else {
+                count++;
             }
         }
-        return ans;
 
+        sort(nums.begin(), nums.end());
+        return count;
     }
 };
