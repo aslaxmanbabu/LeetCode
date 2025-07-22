@@ -1,49 +1,30 @@
 class Solution {
 public:
     vector<vector<int>> threeSum(vector<int>& nums) {
-
         vector<vector<int>> result;
-        int n = nums.size(), i=0;
         sort(nums.begin(), nums.end());
-        map<vector<int>, bool> flag;
-
-        if((nums[0] < 0 && nums[n-1] < 0) || (nums[0] > 0 && nums[n-1] > 0)) {
-            return result;
-        }
-        else if(nums[0] == 0 && nums[n-1] == 0) {
-            result.push_back({0, 0, 0});
-            return result;
-        }
-
-        while(i<n) {
-            int left = i+1, right = n - 1;
-            int target = nums[i];
-            while( left < right ) {
-                vector<int> temp;
-                target = nums[i] + nums[left] + nums[right];
-                if(target == 0) {
-                    temp.push_back(nums[i]);
-                    temp.push_back(nums[left]);
-                    temp.push_back(nums[right]);
-                    if (!flag[temp]) {
-                        result.push_back(temp);
-                        flag[temp] = true;
-                    }
+        int n = nums.size();
+        for (int i = 0; i < n - 2; i++) {
+            if (i > 0 && nums[i] == nums[i - 1]) continue;
+            int left = i + 1, right = n - 1;
+            int x;
+            while (left < right) {
+                x = nums[left] + nums[right] + nums[i];
+                if (x == 0) {
+                    result.push_back({nums[left], nums[right], nums[i]});
+                    while (left < right && nums[left] == nums[left + 1])
+                        left++;
+                    while (left < right && nums[right] == nums[right - 1])
+                        right--;
                     left++;
                     right--;
-                    continue;
-                }
-                else if (target < 0) {
+                } else if (x < 0) {
                     left++;
-                }
-                else {
+                } else {
                     right--;
                 }
             }
-            i++;
         }
-
         return result;
-        
     }
 };
